@@ -1,0 +1,17 @@
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\CommForAdolph.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\CommForAdolph.pdb
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\IBatisNet.Common.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\IBatisNet.DataMapper.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\MySql.Data.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\System.Data.SQLite.DLL
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\obj\Debug\CommForAdolph.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\obj\Debug\CommForAdolph.pdb
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\ThoughtWorks.QRCode.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\itextsharp.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\ChnCharInfo.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\log4net.dll
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\obj\Debug\CommForAdolph.csprojResolveAssemblyReference.cache
+E:\工作内容归档\VS项目\ContentFind\ContentFileFind\CommForAdolph\bin\Debug\Qr.Net.Imaging.dll

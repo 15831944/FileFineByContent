@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5A33F696-B5F2-4106-A2DA-B1D0C859B23D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CommForAdolph</RootNamespace>
+    <AssemblyName>CommForAdolph</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ChnCharInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=18f031bd02e5e291, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\ChnCharInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="IBatisNet.Common, Version=1.4.1.0, Culture=neutral, PublicKeyToken=ed781d9fc396c6ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\IBatisNet.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="IBatisNet.DataMapper, Version=1.5.1.0, Culture=neutral, PublicKeyToken=ed781d9fc396c6ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\IBatisNet.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.4.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Qr.Net.Imaging">
+      <HintPath>Lib\Qr.Net.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SQLite, Version=1.0.62.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\System.Data.SQLite.DLL</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.4510.26573, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BarCodeHelper\BarCodeHelper.cs" />
+    <Compile Include="BarCodeHelper\BarCodeToHTML.cs" />
+    <Compile Include="CacheHelper\CacheHelper.cs" />
+    <Compile Include="CacheHelper\DataCache.cs" />
+    <Compile Include="ChartExChange\EcanConvertToCh.cs" />
+    <Compile Include="ChartExChange\PinYin.cs" />
+    <Compile Include="ConfigHelper\ConfigHelper.cs" />
+    <Compile Include="CooikeHelper\CookieHelper.cs" />
+    <Compile Include="DateHelper\CNDate.cs" />
+    <Compile Include="EncryptHelper\DEncrypt.cs" />
+    <Compile Include="EncryptHelper\DESEncrypt.cs" />
+    <Compile Include="EncryptHelper\Encrypt.cs" />
+    <Compile Include="EncryptHelper\HashEncode.cs" />
+    <Compile Include="EncryptHelper\MySecurity.cs" />
+    <Compile Include="EncryptHelper\RSACryption.cs" />
+    <Compile Include="FileHelper\DirFile.cs" />
+    <Compile Include="FileHelper\FileOperate.cs" />
+    <Compile Include="FTPHelper\FTPClient.cs" />
+    <Compile Include="FTPHelper\FTPHelper.cs" />
+    <Compile Include="FTPHelper\FTPOperater.cs" />
+    <Compile Include="IsSafeSqlStrings\IsSafeSqlString.cs" />
+    <Compile Include="Log4Helper\Log.cs" />
+    <Compile Include="MailHelper\Content\ConnectCommand.cs" />
+    <Compile Include="MailHelper\Content\ConnectResponse.cs" />
+    <Compile Include="MailHelper\Content\DeleCommand.cs" />
+    <Compile Include="MailHelper\Content\ListCommand.cs" />
+    <Compile Include="MailHelper\Content\ListResponse.cs" />
+    <Compile Include="MailHelper\Content\MailHeaders.cs" />
+    <Compile Include="MailHelper\Content\MailMessageEx.cs" />
+    <Compile Include="MailHelper\Content\NoopCommand.cs" />
+    <Compile Include="MailHelper\Content\PassCommand.cs" />
+    <Compile Include="MailHelper\Content\Pop3Client.cs" />
+    <Compile Include="MailHelper\Content\Pop3Command.cs" />
+    <Compile Include="MailHelper\Content\Pop3Commands.cs" />
+    <Compile Include="MailHelper\Content\Pop3Exception.cs" />
+    <Compile Include="MailHelper\Content\Pop3ListItem.cs" />
+    <Compile Include="MailHelper\Content\Pop3Response.cs" />
+    <Compile Include="MailHelper\Content\Pop3Responses.cs" />
+    <Compile Include="MailHelper\Content\Pop3State.cs" />
+    <Compile Include="MailHelper\Content\QuitCommand.cs" />
+    <Compile Include="MailHelper\Content\RetrCommand.cs" />
+    <Compile Include="MailHelper\Content\RetrResponse.cs" />
+    <Compile Include="MailHelper\Content\RsetCommand.cs" />
+    <Compile Include="MailHelper\Content\Stat.cs" />
+    <Compile Include="MailHelper\Content\StatCommand.cs" />
+    <Compile Include="MailHelper\Content\StatResponse.cs" />
+    <Compile Include="MailHelper\Content\TopCommand.cs" />
+    <Compile Include="MailHelper\Content\UserCommand.cs" />
+    <Compile Include="MailHelper\Mail\MailHelper.cs" />
+    <Compile Include="MailHelper\Mail\MailPoper.cs" />
+    <Compile Include="MailHelper\Mail\MailSender.cs" />
+    <Compile Include="MailHelper\Mail\SmtpServerHelper.cs" />
+    <Compile Include="Mime\MediaTypes.cs" />
+    <Compile Include="Mime\MimeEntity.cs" />
+    <Compile Include="Mime\MimeHeaders.cs" />
+    <Compile Include="Mime\MimeReader.cs" />
+    <Compile Include="Mime\Pop3Commands.cs" />
+    <Compile Include="Mime\QuotedPrintableEncoding.cs" />
+    <Compile Include="NetHelper\HttpHelper.cs" />
+    <Compile Include="NetHelper\NetHelper.cs" />
+    <Compile Include="RandomHelper\BaseRandom.cs" />
+    <Compile Include="RandomHelper\RandomHelper.cs" />
+    <Compile Include="RandomHelper\RandomOperate.cs" />
+    <Compile Include="ResourceManager\AppMessage.cs" />
+    <Compile Include="ResourceManager\ResourceManager.cs" />
+    <Compile Include="ResourceManager\ResourceManagerWrapper.cs" />
+    <Compile Include="ResourceManager\Resources.cs" />
+    <Compile Include="SerializeHelper\SerializeHelper.cs" />
+    <Compile Include="SessionHelper\SessionHelper.cs" />
+    <Compile Include="ThreadPoolHelper\ManagedThreadPool.cs" />
+    <Compile Include="ThreadSafe\ISyncRoot.cs" />
+    <Compile Include="ThreadSafe\QueueProcessor.cs" />
+    <Compile Include="ThreadSafe\SafeBindingList.cs" />
+    <Compile Include="ThreadSafe\SafeDictionary.cs" />
+    <Compile Include="ThreadSafe\SafeList.cs" />
+    <Compile Include="ThreadSafe\SafeQueue.cs" />
+    <Compile Include="ThreadSafe\SafeStream.cs" />
+    <Compile Include="TypeExtend\TypeExtend.cs" />
+    <Compile Include="UpOrDownLoadHelper\DownLoadHelper.cs" />
+    <Compile Include="UpOrDownLoadHelper\FileDown.cs" />
+    <Compile Include="UpOrDownLoadHelper\FileUp.cs" />
+    <Compile Include="UpOrDownLoadHelper\UpLoadFiles.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UrlHelper\WebSitePathHelper.cs" />
+    <Compile Include="ValidatorHelper\ValidatorHelper.cs" />
+    <Compile Include="VerifyHelper\VerifyCodeHelper.cs" />
+    <Compile Include="VerifyHelper\VerifyCodeRand.cs" />
+    <Compile Include="VideoHelper\VideoHelper.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DateHelper\TimeHelper.cs" />
+    <Compile Include="DateHelper\TimeStampHelper.cs" />
+    <Compile Include="EnumHelper\EnumHelper.cs" />
+    <Compile Include="Excel\DataToExcel.cs" />
+    <Compile Include="Excel\ExcelHelper.cs" />
+    <Compile Include="Excel\ExportExcel.cs" />
+    <Compile Include="Excel\GridViewExport.cs" />
+    <Compile Include="HtmlHelper\HtmlHelper.cs" />
+    <Compile Include="HtmlHelper\JavaScriptHelper.cs" />
+    <Compile Include="INIHelper\INIFile.cs" />
+    <Compile Include="IpHelper\IpHelper.cs" />
+    <Compile Include="JsonHelper\ConvertJson.cs" />
+    <Compile Include="PDFHelper\PDFHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DBHelper\BaseSqlMapDao.cs" />
+    <Compile Include="DBHelper\CommandInfo.cs" />
+    <Compile Include="DBHelper\DbHelperMySQL.cs" />
+    <Compile Include="DBHelper\DbHelperOleDb.cs" />
+    <Compile Include="DBHelper\DbHelperOra.cs" />
+    <Compile Include="DBHelper\DbHelperSQL.cs" />
+    <Compile Include="DBHelper\DbHelperSQL2.cs" />
+    <Compile Include="DBHelper\DbHelperSQLite.cs" />
+    <Compile Include="DBHelper\DbHelperSQLP.cs" />
+    <Compile Include="DBHelper\DESEncrypt.cs" />
+    <Compile Include="DBHelper\OracleHelper.cs" />
+    <Compile Include="DBHelper\PubConstant.cs" />
+    <Compile Include="DBHelper\SQLHelper.cs" />
+    <Compile Include="QRcode\QRcode.cs" />
+    <Compile Include="RegexHelper\RegexHelper.cs" />
+    <Compile Include="RegisterHelper\RegisterHelper.cs" />
+    <Compile Include="StringHelper\StringHelper.cs" />
+    <Compile Include="TypeConvertHelper\ObjectConversion.cs" />
+    <Compile Include="UrlHelper\UrlHelper.cs" />
+    <Compile Include="WebClientHelper\WebClientHelper.cs" />
+    <Compile Include="WebSafeHelper\WebSafe.cs" />
+    <Compile Include="WebServiceHelper\WebserviceHelper.cs" />
+    <Compile Include="XMLHelper\XmlHelper.cs" />
+    <Compile Include="ZipHelper\ClassZip.cs" />
+    <Compile Include="ZipHelper\SharpZip.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Excel\excel.txt" />
+    <Content Include="Lib\COM.Excel.dll" />
+    <Content Include="Lib\Excel.dll" />
+    <Content Include="Lib\IBatisNet.Common.dll" />
+    <Content Include="Lib\IBatisNet.DataMapper.dll" />
+    <Content Include="Lib\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="Lib\itextsharp.dll" />
+    <Content Include="Lib\log4net.dll" />
+    <Content Include="Lib\LTP.Accounts.dll" />
+    <Content Include="Lib\LTP.Accounts.txt" />
+    <Content Include="Lib\LtpPageControl.dll" />
+    <Content Include="Lib\Microsoft.Office.Interop.Owc11.dll" />
+    <Content Include="Lib\Microsoft.Practices.EnterpriseLibrary.Common.dll" />
+    <Content Include="Lib\Microsoft.Practices.EnterpriseLibrary.Data.dll" />
+    <Content Include="Lib\Microsoft.Web.UI.WebControls.dll" />
+    <Content Include="Lib\MySql.Data.dll" />
+    <Content Include="Lib\NPOI\.net 2.0\Ionic.Zip.dll" />
+    <Content Include="Lib\NPOI\.net 2.0\NPOI.dll" />
+    <Content Include="Lib\NPOI\.net 2.0\NPOI.XML" />
+    <Content Include="Lib\NPOI\.net 4.0\Ionic.Zip.dll" />
+    <Content Include="Lib\NPOI\.net 4.0\NPOI.dll" />
+    <Content Include="Lib\NPOI\.net 4.0\NPOI.XML" />
+    <Content Include="Lib\NPOI\Ionic_Utils_Zip_license.txt" />
+    <Content Include="Lib\NPOI\License.txt" />
+    <Content Include="Lib\NPOI\Read Me.txt" />
+    <Content Include="Lib\NPOI\Release Notes.txt" />
+    <Content Include="Lib\OpenSmtp.dll" />
+    <Content Include="Lib\OWC10Chart.dll" />
+    <Content Include="Lib\PinYin\ChnCharInfo.dll" />
+    <Content Include="Lib\System.Data.SQLite.DLL" />
+    <Content Include="Lib\ThoughtWorks.QRCode.dll" />
+    <Content Include="Log4Helper\日志使用说明.txt" />
+    <Content Include="ResourceManager\Sample.xml" />
+    <Content Include="ThreadPoolHelper\线程使用说明.txt" />
+    <Content Include="WebSafeHelper\使用说明.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Lib\System.Data.SQLite.lib" />
+    <None Include="Log4Helper\log4net.config" />
+    <None Include="帮助文档\Common.Utility帮助文档.chm" />
+    <None Include="帮助文档\Helper帮助文档.chm" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
