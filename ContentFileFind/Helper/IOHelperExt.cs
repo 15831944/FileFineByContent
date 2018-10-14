@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ContentFileFind
 {
@@ -154,10 +155,13 @@ namespace ContentFileFind
         /// 浏览文件夹
         /// </summary>
         /// <param name="path"></param>
-        public static void ExplorePath(string path)
+        public static void ExplorePath(string path,bool isSelect=false)
         {
-            System.Diagnostics.Process.Start("explorer.exe", path);
-        } 
+            if (isSelect)
+                System.Diagnostics.Process.Start("explorer.exe", "/select," + path);
+            else
+                System.Diagnostics.Process.Start("explorer.exe", path);
+        }
         #endregion
 
         #region 获取路径下所有文件
@@ -209,8 +213,6 @@ namespace ContentFileFind
                     GetAllFiles(item, ref fileInfos);
                 }
             }
-            //按文件大小排序
-            fileInfos = fileInfos.OrderBy(p=>p.Length).ToList();
         }
         #endregion
 

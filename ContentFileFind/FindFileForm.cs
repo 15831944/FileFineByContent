@@ -38,7 +38,7 @@ namespace ContentFileFind
             string fileSelectItem = listbox.SelectedItem.ToString();
             string path = fileSelectItem.Substring(0, fileSelectItem.LastIndexOf('\\'));
             //打开所在文件夹
-            IOHelperExt.ExplorePath(path);
+            IOHelperExt.ExplorePath(fileSelectItem,true);
         }
         //选择搜索路径
         private void selectFile_Click(object sender, EventArgs e)
@@ -61,6 +61,9 @@ namespace ContentFileFind
                     DirectoryInfo dirInfo = new DirectoryInfo(this.txtFilepath.Text);
                     //获取文件夹下所有文件
                     IOHelperExt.GetAllFiles(dirInfo, ref listFiles);
+
+                    //按文件大小排序
+                    listFiles = listFiles.OrderBy(p => p.Length).ToList();
 
                     //foreach (var item in listFiles)
                     //{
@@ -110,33 +113,37 @@ namespace ContentFileFind
 
 
             //分段
-            var lengthInterval = 30;
-            //段数
-            int itemsCount = listFiles.Count % lengthInterval == 0 ? listFiles.Count / lengthInterval : (listFiles.Count / lengthInterval) + 1;
+            var lengthInterval = 10;
 
-            CountdownEvent handler = new CountdownEvent(itemsCount);
+            List<List<FileInfo>> lists = new List<List<FileInfo>>();
 
-            for (int i = 0; i <= itemsCount; i++)
+            var itemsCount = listFiles.Count / lengthInterval;
+            var overFlowCount = listFiles.Count % lengthInterval;
+
+            //得总线程数
+            var threadCount = itemsCount == 0 ? 1 : lengthInterval + 1;
+
+            int startIndex = 0,takeCount=0;
+
+            for (int i = 0; i < threadCount; i++)
             {
-                IList<FileInfo> itemlist = new List<FileInfo>();
+                //商为0时取余数，否则取商
+                takeCount = itemsCount == 0 ? overFlowCount : itemsCount;
+                var itemlist = listFiles.Skip(startIndex).Take(takeCount).ToList();
+                lists.Add(itemlist);
+                startIndex = itemsCount - 1;
+            }
 
-                if (listFiles.Count % lengthInterval != 0 && i == itemsCount)
-                {
-                    itemlist = listFiles.Skip(i * lengthInterval).Take(listFiles.Count % lengthInterval).ToList();
-                }
-                else
-                {
-                    itemlist = listFiles.Skip(i * lengthInterval).Take(lengthInterval).ToList();
-                }
-                //文件查找
-                if (itemlist.Count > 0)
-                {
-                    ThreadPool.QueueUserWorkItem(delegate
+            //计数 余数>0是则不能整除   商为0时表示刚好整除 则总数为lengthInterval  否则+1
+            CountdownEvent handler = new CountdownEvent(threadCount);
+
+            foreach (var item in lists)
+            {
+                ThreadPool.QueueUserWorkItem(delegate
                     {
-                        ContentCheck(searchValue, itemlist, listbox2Delegate);
+                        ContentCheck(searchValue, item, listbox2Delegate);
                         handler.Signal();
                     });
-                }
             }
 
             Thread checkThreadPool = new Thread(new ThreadStart(delegate
@@ -190,11 +197,11 @@ namespace ContentFileFind
                     //}
                     //else
                     //{
-                        //检查搜索内容
-                        if (IOHelperExt.CheckContent(searchValue, itemStr) != -1)
-                        {
-                            this.listBox2.BeginInvoke(listbox2Delegate, itemStr);
-                        }
+                    //检查搜索内容
+                    if (IOHelperExt.CheckContent(searchValue, itemStr) != -1)
+                    {
+                        this.listBox2.BeginInvoke(listbox2Delegate, itemStr);
+                    }
                     //}
                 }
                 else
