@@ -8,7 +8,7 @@ using ICSharpCode.SharpZipLib.Zip;
 namespace CommForAdolph.ZipHelper
 {
     /// <summary>
-    /// 文件压缩类帮助类
+    /// 文件压缩类帮助类  测试一下
     /// </summary>
     public class ClassZip
     {
