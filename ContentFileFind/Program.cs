@@ -15,9 +15,9 @@ namespace ContentFileFind
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FindFileForm());
+            //Application.Run(new FindFileForm());
 
-            //Application.Run(new Form1());
+            Application.Run(new Form1());
             //throw new Exception("12313");
         }
     }

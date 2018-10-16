@@ -18,10 +18,16 @@ namespace ContentFileFind
         {
             InitializeComponent();
 
-            QRcode.CreateTGCode("qweqw",50,"E:\\IMG",Color.Black,QrPosition.Middle,0,"E:\\IMG\\打车票.jpg");
+            //QRcode.CreateTGCode("qweqw",50,"E:\\IMG",Color.Black,QrPosition.Middle,0,"E:\\IMG\\打车票.jpg");
 
             //QRcode.Create("123", 2, "E:\\IMG\\");
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CommForAdolph.OfficeHelper officeHelper = new CommForAdolph.OfficeHelper();
+            officeHelper.CheckWordContent(@"E:\工作内容归档\任务文档\JL-CX-121-P+MEL编写修订申请表.doc", "MEL");
         }
     }
 }

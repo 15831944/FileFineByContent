@@ -11,15 +11,18 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CommForAdolph;
 
 namespace ContentFileFind
 {
     public partial class FindFileForm : Form
     {
         //搜索状态标识是否继续
-        public static bool CheckStatus = true;
+        //public static bool CheckStatus = true;
         //选取文件夹下所有文件列表
         List<FileInfo> listFiles = new List<FileInfo>();
+        //搜索状态
+        public CountdownEvent handler;
 
         public FindFileForm()
         {
@@ -38,7 +41,7 @@ namespace ContentFileFind
             string fileSelectItem = listbox.SelectedItem.ToString();
             string path = fileSelectItem.Substring(0, fileSelectItem.LastIndexOf('\\'));
             //打开所在文件夹
-            IOHelperExt.ExplorePath(fileSelectItem,true);
+            IOHelperExt.ExplorePath(fileSelectItem, true);
         }
         //选择搜索路径
         private void selectFile_Click(object sender, EventArgs e)
@@ -46,14 +49,12 @@ namespace ContentFileFind
             //定义委托
             //Action<string> actionDelegate = (x) => { listBox1.Items.Add(x); };
 
-
             DialogResult formResult = folderBrowserDialog1.ShowDialog();
             if (formResult == System.Windows.Forms.DialogResult.OK)
             {
                 this.txtFilepath.Text = folderBrowserDialog1.SelectedPath;
                 //清空文件列表
                 //this.listBox1.Items.Clear();
-
 
                 ThreadPool.QueueUserWorkItem(delegate
                 {
@@ -82,7 +83,6 @@ namespace ContentFileFind
         /// <param name="e"></param>
         private void btn_Reset_Click(object sender, EventArgs e)
         {
-            //this.listBox1.Items.Clear();
             this.txtFilepath.Text = "";
         }
 
@@ -93,6 +93,16 @@ namespace ContentFileFind
         /// <param name="e"></param>
         private void btn_SearchKeyValue_Click(object sender, EventArgs e)
         {
+            //重置为0表示停止
+            if (btn_SearchKeyValue.Text == "停止")
+            {
+                handler.Reset(0);
+                btn_SearchKeyValue.Text = btn_SearchKeyValue.Text == "停止" ? "搜索" : "停止";
+                return;
+            }
+
+            btn_SearchKeyValue.Text = btn_SearchKeyValue.Text == "停止" ? "搜索" : "停止";
+
             //查找到的文件列表添加
             Action<string> listbox2Delegate = (fileItem) =>
             {
@@ -100,6 +110,12 @@ namespace ContentFileFind
                 {
                     listBox2.Items.Add(fileItem);
                 }
+            };
+
+            //查找到的文件列表添加
+            Action<string> disedDelegate = (fileCount) =>
+            {
+                label1.Text = fileCount;
             };
 
             IList<string> fileList = new List<string>();
@@ -113,7 +129,7 @@ namespace ContentFileFind
 
 
             //分段
-            var lengthInterval = 10;
+            var lengthInterval = 1;
 
             List<List<FileInfo>> lists = new List<List<FileInfo>>();
 
@@ -123,7 +139,7 @@ namespace ContentFileFind
             //得总线程数
             var threadCount = itemsCount == 0 ? 1 : lengthInterval + 1;
 
-            int startIndex = 0,takeCount=0;
+            int startIndex = 0, takeCount = 0;
 
             for (int i = 0; i < threadCount; i++)
             {
@@ -131,18 +147,18 @@ namespace ContentFileFind
                 takeCount = itemsCount == 0 ? overFlowCount : itemsCount;
                 var itemlist = listFiles.Skip(startIndex).Take(takeCount).ToList();
                 lists.Add(itemlist);
-                startIndex = itemsCount - 1;
+                startIndex += takeCount;
             }
 
             //计数 余数>0是则不能整除   商为0时表示刚好整除 则总数为lengthInterval  否则+1
-            CountdownEvent handler = new CountdownEvent(threadCount);
-
+            handler = new CountdownEvent(listFiles.Count);
+            this.label3.Text = listFiles.Count.ToString();
             foreach (var item in lists)
             {
                 ThreadPool.QueueUserWorkItem(delegate
                     {
-                        ContentCheck(searchValue, item, listbox2Delegate);
-                        handler.Signal();
+                        ContentCheck(searchValue, item, handler, listbox2Delegate, disedDelegate);
+                        //handler.Signal();
                     });
             }
 
@@ -165,10 +181,16 @@ namespace ContentFileFind
         /// 内容查找
         /// </summary>
         /// <param name="searchValue"></param>
-        private void ContentCheck(string searchValue, IList<FileInfo> fileList, Action<string> listbox2Delegate)
+        private void ContentCheck(string searchValue, IList<FileInfo> fileList, CountdownEvent handler, Action<string> listbox2Delegate, Action<string> disedDelegate)
         {
+            CommForAdolph.OfficeHelper officeHelper = new CommForAdolph.OfficeHelper();
             foreach (var item in fileList)//listBox1.Items)
             {
+                if (handler.CurrentCount == 0)
+                {
+                    return;
+                }
+
                 //文件全路径
                 var itemStr = item.FullName.ToString();
                 int fileNameStartIndex = itemStr.LastIndexOf('\\');
@@ -179,34 +201,35 @@ namespace ContentFileFind
                         this.listBox2.BeginInvoke(listbox2Delegate, itemStr);
                     //listBox2.Items.Add(item);
                 }
-                if (CheckStatus)
+
+                if (itemStr.Contains("~$"))
+                    continue;
+
+                if (item.Extension == ".doc" || item.Extension == ".docx")
                 {
-                    //if (item.Extension == ".doc" || item.Extension == ".docx")
-                    //{
-                    //    if (OfficeHelper.CheckWordContent(itemStr, searchValue))
-                    //    {
-                    //        this.listBox2.BeginInvoke(listbox2Delegate, itemStr);
-                    //    }
-                    //}
-                    //else if (item.Extension == ".xls" || item.Extension == ".xlsx")
-                    //{
-                    //    if (OfficeHelper.CheckExcelContent(itemStr, searchValue))
-                    //    {
-                    //        this.listBox2.BeginInvoke(listbox2Delegate, itemStr);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //检查搜索内容
-                    if (IOHelperExt.CheckContent(searchValue, itemStr) != -1)
+
+                    if (officeHelper.CheckWordContent(itemStr, searchValue))
                     {
                         this.listBox2.BeginInvoke(listbox2Delegate, itemStr);
                     }
-                    //}
                 }
-                else
+                else if (item.Extension == ".xls" || item.Extension == ".xlsx")
                 {
-                    return;
+                    if (officeHelper.CheckExcelContent(itemStr, searchValue))
+                    {
+                        this.listBox2.BeginInvoke(listbox2Delegate, itemStr);
+                    }
+                }
+                //检查搜索内容
+                else if (IOHelperExt.CheckContent(searchValue, itemStr) != -1)
+                {
+                    this.listBox2.BeginInvoke(listbox2Delegate, itemStr);
+                }
+
+                if (handler.CurrentCount > 0)
+                {
+                    handler.Signal();
+                    this.label1.BeginInvoke(disedDelegate, handler.CurrentCount.ToString());
                 }
             }
         }

@@ -37,6 +37,10 @@
             this.btn_SearchKeyValue = new System.Windows.Forms.Button();
             this.btn_ClearResult = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +79,7 @@
             this.listBox2.ItemHeight = 12;
             this.listBox2.Location = new System.Drawing.Point(3, 17);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(469, 403);
+            this.listBox2.Size = new System.Drawing.Size(469, 372);
             this.listBox2.TabIndex = 5;
             this.listBox2.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
             // 
@@ -92,7 +96,7 @@
             this.btn_SearchKeyValue.Name = "btn_SearchKeyValue";
             this.btn_SearchKeyValue.Size = new System.Drawing.Size(75, 23);
             this.btn_SearchKeyValue.TabIndex = 7;
-            this.btn_SearchKeyValue.Text = "搜索内容";
+            this.btn_SearchKeyValue.Text = "搜索";
             this.btn_SearchKeyValue.UseVisualStyleBackColor = true;
             this.btn_SearchKeyValue.Click += new System.EventHandler(this.btn_SearchKeyValue_Click);
             // 
@@ -108,20 +112,61 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox1.Controls.Add(this.listBox2);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 66);
+            this.groupBox1.Location = new System.Drawing.Point(0, 97);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(475, 423);
+            this.groupBox1.Size = new System.Drawing.Size(475, 392);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查找结果";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(43, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(11, 12);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(108, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(11, 12);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "/";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(144, 67);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(11, 12);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 66);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "剩余";
             // 
             // FindFileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(475, 489);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_ClearResult);
             this.Controls.Add(this.btn_SearchKeyValue);
@@ -148,6 +193,10 @@
         private System.Windows.Forms.Button btn_SearchKeyValue;
         private System.Windows.Forms.Button btn_ClearResult;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
